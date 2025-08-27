@@ -12,10 +12,10 @@ const BuildingVisualization = ({ occupiedRooms, bookedRooms, selectedRooms }) =>
       const isBooked = bookedRooms.includes(roomNumber);
       const isSelected = selectedRooms.includes(roomNumber);
       
-      let roomClass = "w-10 h-10 border-2 border-gray-300 text-xs flex items-center justify-center font-mono font-bold transition-all duration-300 transform hover:scale-110";
+      let roomClass = "w-10 h-10 border-2 border-gray-300 text-xs flex items-center justify-center font-mono font-bold";
       
       if (isSelected) {
-        roomClass += " bg-gradient-to-br from-green-500 to-green-600 text-white border-green-600 shadow-lg animate-pulse";
+        roomClass += " bg-gradient-to-br from-green-500 to-green-600 text-white border-green-600 shadow-lg";
       } else if (isBooked) {
         roomClass += " bg-gradient-to-br from-blue-500 to-blue-600 text-white border-blue-600 shadow-md";
       } else if (isOccupied) {
@@ -36,7 +36,7 @@ const BuildingVisualization = ({ occupiedRooms, bookedRooms, selectedRooms }) =>
     }
     
     return (
-      <div key={floorNumber} className="flex items-center space-x-3 mb-3 p-2 rounded-xl hover:bg-white/30 transition-all duration-300">
+      <div key={floorNumber} className="flex items-center space-x-3 mb-3 p-2 rounded-xl">
         {/* Enhanced Floor Indicator */}
         <div className="w-16 h-10 bg-gradient-to-r from-gray-600 to-gray-700 rounded-xl flex items-center justify-center shadow-lg border border-gray-500">
           <span className="text-white font-bold text-sm">F{floorNumber}</span>
@@ -68,51 +68,57 @@ const BuildingVisualization = ({ occupiedRooms, bookedRooms, selectedRooms }) =>
         </h3>
       </div>
       
-      {/* Enhanced Legend */}
-      <div className="mb-6 p-4 bg-white/60 rounded-2xl border border-white/30">
-        <h4 className="font-semibold text-gray-700 mb-3 text-center">Room Status Legend</h4>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div className="flex items-center space-x-2 justify-center">
-            <div className="w-6 h-6 bg-gradient-to-br from-gray-100 to-gray-200 border-2 border-gray-300 rounded-lg"></div>
-            <span className="text-sm text-gray-600 font-medium">Available</span>
+      <div className="space-y-6 flex justify-between gap-8">
+        <div className='flex flex-col gap-5 w-[50%]'>
+          {/* Enhanced Legend */}
+          <div className="p-4 bg-white/60 rounded-2xl border border-white/30">
+            <h4 className="font-semibold text-gray-700 mb-3 text-center">Room Status Legend</h4>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="flex items-center space-x-2 justify-center">
+                <div className="w-6 h-6 bg-gradient-to-br from-gray-100 to-gray-200 border-2 border-gray-300 rounded-lg"></div>
+                <span className="text-sm text-gray-600 font-medium">Available</span>
+              </div>
+              <div className="flex items-center space-x-2 justify-center">
+                <div className="w-6 h-6 bg-gradient-to-br from-red-500 to-red-600 border-2 border-red-600 rounded-lg"></div>
+                <span className="text-sm text-gray-600 font-medium">Occupied</span>
+              </div>
+              <div className="flex items-center space-x-2 justify-center">
+                <div className="w-6 h-6 bg-gradient-to-br from-blue-500 to-blue-600 border-2 border-blue-600 rounded-lg"></div>
+                <span className="text-sm text-gray-600 font-medium">Booked</span>
+              </div>
+              <div className="flex items-center space-x-2 justify-center">
+                <div className="w-6 h-6 bg-gradient-to-br from-green-500 to-green-600 border-2 border-green-600 rounded-lg"></div>
+                <span className="text-sm text-gray-600 font-medium">Selected</span>
+              </div>
+            </div>
           </div>
-          <div className="flex items-center space-x-2 justify-center">
-            <div className="w-6 h-6 bg-gradient-to-br from-red-500 to-red-600 border-2 border-red-600 rounded-lg"></div>
-            <span className="text-sm text-gray-600 font-medium">Occupied</span>
-          </div>
-          <div className="flex items-center space-x-2 justify-center">
-            <div className="w-6 h-6 bg-gradient-to-br from-blue-500 to-blue-600 border-2 border-blue-600 rounded-lg"></div>
-            <span className="text-sm text-gray-600 font-medium">Booked</span>
-          </div>
-          <div className="flex items-center space-x-2 justify-center">
-            <div className="w-6 h-6 bg-gradient-to-br from-green-500 to-green-600 border-2 border-green-600 rounded-lg animate-pulse"></div>
-            <span className="text-sm text-gray-600 font-medium">Selected</span>
+          
+          {/* Enhanced Footer Information */}
+          <div className="text-center">
+            <div className="inline-flex items-center space-x-2 bg-white/60 px-4 py-2 rounded-full border border-white/30">
+              <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span className="text-sm text-gray-600 font-medium">
+                S = Stairs/Lift | Rooms are numbered from left to right
+              </span>
+            </div>
+            
+            <div className="mt-3 text-xs text-gray-500 space-y-1">
+              <p>• Building has 10 floors with 97 total rooms</p>
+              <p>• Floors 1-9: 10 rooms each | Floor 10: 7 rooms</p>
+              <p>• Interactive visualization with real-time updates</p>
+            </div>
           </div>
         </div>
-      </div>
-      
-      {/* Enhanced Building Layout */}
-      <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-2xl border border-blue-200/50">
-        <div className="flex flex-col-reverse">
-          {Array.from({ length: 10 }, (_, i) => renderFloor(10 - i))}
-        </div>
-      </div>
-      
-      {/* Enhanced Footer Information */}
-      <div className="mt-6 text-center">
-        <div className="inline-flex items-center space-x-2 bg-white/60 px-4 py-2 rounded-full border border-white/30">
-          <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
-          <span className="text-sm text-gray-600 font-medium">
-            S = Stairs/Lift | Rooms are numbered from left to right
-          </span>
-        </div>
-        
-        <div className="mt-3 text-xs text-gray-500 space-y-1">
-          <p>• Building has 10 floors with 97 total rooms</p>
-          <p>• Floors 1-9: 10 rooms each | Floor 10: 7 rooms</p>
-          <p>• Interactive visualization with real-time updates</p>
+
+        <div className='flex flex-col gap-5 w-[50%]'>
+          {/* Enhanced Building Layout */}
+          <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-6 rounded-2xl border border-blue-200/50">
+            <div className="flex flex-col-reverse">
+              {Array.from({ length: 10 }, (_, i) => renderFloor(10 - i))}
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -18,10 +18,11 @@ const ControlPanel = ({ onGenerateRandomOccupancy, onResetAll, occupiedRooms, bo
         </h3>
       </div>
       
-      <div className="space-y-6">
+      <div className="space-y-6 flex justify-between gap-8">
+        <div className='flex flex-col gap-5 w-[50%]'>
         {/* Enhanced Statistics Grid */}
         <div className="grid grid-cols-2 gap-4">
-          <div className="bg-gradient-to-br from-blue-500 to-blue-600 p-4 rounded-2xl text-white shadow-lg transform hover:scale-105 transition-all duration-300">
+          <div className="bg-gradient-to-br from-blue-500 to-blue-600 p-4 rounded-2xl text-white shadow-lg">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-blue-100 text-sm font-medium">Total Rooms</p>
@@ -35,7 +36,7 @@ const ControlPanel = ({ onGenerateRandomOccupancy, onResetAll, occupiedRooms, bo
             </div>
           </div>
           
-          <div className="bg-gradient-to-br from-green-500 to-green-600 p-4 rounded-2xl text-white shadow-lg transform hover:scale-105 transition-all duration-300">
+          <div className="bg-gradient-to-br from-green-500 to-green-600 p-4 rounded-2xl text-white shadow-lg">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-green-100 text-sm font-medium">Available</p>
@@ -49,7 +50,7 @@ const ControlPanel = ({ onGenerateRandomOccupancy, onResetAll, occupiedRooms, bo
             </div>
           </div>
           
-          <div className="bg-gradient-to-br from-red-500 to-red-600 p-4 rounded-2xl text-white shadow-lg transform hover:scale-105 transition-all duration-300">
+          <div className="bg-gradient-to-br from-red-500 to-red-600 p-4 rounded-2xl text-white shadow-lg">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-red-100 text-sm font-medium">Occupied</p>
@@ -63,7 +64,7 @@ const ControlPanel = ({ onGenerateRandomOccupancy, onResetAll, occupiedRooms, bo
             </div>
           </div>
           
-          <div className="bg-gradient-to-br from-indigo-500 to-indigo-600 p-4 rounded-2xl text-white shadow-lg transform hover:scale-105 transition-all duration-300">
+          <div className="bg-gradient-to-br from-indigo-500 to-indigo-600 p-4 rounded-2xl text-white shadow-lg">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-indigo-100 text-sm font-medium">Booked</p>
@@ -96,12 +97,14 @@ const ControlPanel = ({ onGenerateRandomOccupancy, onResetAll, occupiedRooms, bo
             <span>100%</span>
           </div>
         </div>
-        
+        </div>
+
+        <div className='flex flex-col gap-5 w-[50%]'>
         {/* Enhanced Control Buttons */}
         <div className="space-y-4">
           <button
             onClick={onGenerateRandomOccupancy}
-            className="w-full bg-gradient-to-r from-purple-600 to-purple-700 text-white px-6 py-4 rounded-2xl hover:from-purple-700 hover:to-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 transform hover:scale-105 transition-all duration-300 shadow-lg font-semibold text-lg flex items-center justify-center space-x-3 cursor-pointer"
+            className="w-full bg-gradient-to-r from-purple-600 to-purple-700 text-white px-6 py-4 rounded-2xl hover:from-purple-700 hover:to-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 shadow-lg font-semibold text-lg flex items-center justify-center space-x-3 cursor-pointer"
             style={{ cursor: 'pointer' }}
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -112,7 +115,7 @@ const ControlPanel = ({ onGenerateRandomOccupancy, onResetAll, occupiedRooms, bo
           
           <button
             onClick={onResetAll}
-            className="w-full bg-gradient-to-r from-red-600 to-red-700 text-white px-6 py-4 rounded-2xl hover:from-red-700 hover:to-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 transform hover:scale-105 transition-all duration-300 shadow-lg font-semibold text-lg flex items-center justify-center space-x-3 cursor-pointer"
+            className="w-full bg-gradient-to-r from-red-600 to-red-700 text-white px-6 py-4 rounded-2xl hover:from-red-700 hover:to-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 shadow-lg font-semibold text-lg flex items-center justify-center space-x-3 cursor-pointer"
             style={{ cursor: 'pointer' }}
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -137,6 +140,7 @@ const ControlPanel = ({ onGenerateRandomOccupancy, onResetAll, occupiedRooms, bo
               </ul>
             </div>
           </div>
+        </div>
         </div>
       </div>
     </div>

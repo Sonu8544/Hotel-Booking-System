@@ -84,10 +84,10 @@ function App() {
         </div>
         
         {/* Main Grid Layout with Enhanced Cards */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
-          {/* Left Column */}
-          <div className="space-y-8">
-            <div className="transform hover:scale-105 transition-all duration-300">
+        <div className="space-y-8 mb-12">
+          {/* Top Row - Control Panel and Booking Interface */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div>
               <ControlPanel
                 onGenerateRandomOccupancy={handleGenerateRandomOccupancy}
                 onResetAll={handleResetAll}
@@ -97,7 +97,7 @@ function App() {
               />
             </div>
             
-            <div className="transform hover:scale-105 transition-all duration-300">
+            <div>
               <BookingInterface
                 availableRooms={availableRooms}
                 onBookRooms={handleBookRooms}
@@ -107,22 +107,20 @@ function App() {
             </div>
           </div>
           
-          {/* Right Column */}
-          <div className="space-y-8">
-            <div className="transform hover:scale-105 transition-all duration-300">
-              <BookingStats
-                occupiedRooms={occupiedRooms}
-                bookedRooms={bookedRooms}
-                selectedRooms={selectedRooms}
-                totalRooms={totalRooms}
-              />
-            </div>
+          {/* Middle Row - Booking Stats */}
+          <div>
+            <BookingStats
+              occupiedRooms={occupiedRooms}
+              bookedRooms={bookedRooms}
+              selectedRooms={selectedRooms}
+              totalRooms={totalRooms}
+            />
           </div>
         </div>
         
         {/* Building Visualization - Full Width with Enhanced Container */}
         <div className="mb-12">
-          <div className="transform hover:scale-105 transition-all duration-300">
+          <div>
             <BuildingVisualization
               occupiedRooms={occupiedRooms}
               bookedRooms={bookedRooms}
