@@ -99,6 +99,7 @@ const ControlPanel = ({
         <div className='flex flex-col gap-5 w-[50%]'>
         {/* Enhanced Control Buttons */}
         <div className="space-y-4">
+         <div className="flex justify-between items-center gap-4">
           <Button
             onClick={onGenerateRandomOccupancy}
             variant="purple"
@@ -123,6 +124,7 @@ const ControlPanel = ({
             </svg>
             <span>Reset All</span>
           </Button>
+          </div>
         </div>
         
         {/* Info Section */}
