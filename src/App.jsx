@@ -1,54 +1,40 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import "./App.css";
 import BuildingVisualization from './components/BuildingVisualization';
 import BookingInterface from './components/BookingInterface';
 import ControlPanel from './components/ControlPanel';
 import BookingStats from './components/BookingStats';
-import { generateAllRooms, generateRandomOccupancy } from './utils/roomBooking';
+import ErrorBoundary from './components/ErrorBoundary';
+import { useHotelState } from './hooks/useHotelState';
 
 function App() {
-  const [occupiedRooms, setOccupiedRooms] = useState([]);
-  const [bookedRooms, setBookedRooms] = useState([]);
-  const [selectedRooms, setSelectedRooms] = useState([]);
-  const [totalRooms] = useState(97); // 97 total rooms as per requirements
-  
-  // Get available rooms (not occupied and not booked)
-  const availableRooms = generateAllRooms().filter(
-    room => !occupiedRooms.includes(room) && !bookedRooms.includes(room)
-  );
-  
-  // Handle booking rooms
-  const handleBookRooms = (roomsToBook) => {
-    setBookedRooms(prev => [...prev, ...roomsToBook]);
-    setSelectedRooms([]);
-  };
-  
-  // Generate random occupancy
-  const handleGenerateRandomOccupancy = () => {
-    const randomOccupied = generateRandomOccupancy(0.3); // 30% occupancy
-    setOccupiedRooms(randomOccupied);
-    setBookedRooms([]); // Clear any existing bookings
-    setSelectedRooms([]); // Clear any selected rooms
-  };
-  
-  // Reset all rooms
-  const handleResetAll = () => {
-    setOccupiedRooms([]);
-    setBookedRooms([]);
-    setSelectedRooms([]);
-  };
-  
-  // Initialize with some random occupancy on component mount
-  useEffect(() => {
-    handleGenerateRandomOccupancy();
-  }, []);
+  const {
+    // State
+    occupiedRooms,
+    bookedRooms,
+    selectedRooms,
+    isLoading,
+    error,
+    totalRooms,
+    
+    // Computed values
+    availableRooms,
+    
+    // Actions
+    setSelectedRooms,
+    handleBookRooms,
+    handleGenerateRandomOccupancy,
+    handleResetAll,
+    clearError,
+  } = useHotelState();
   
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
-      
-      <div className="relative container mx-auto px-4 py-8">
+    <ErrorBoundary>
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
+        {/* Background Pattern */}
+        <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
+        
+        <div className="relative container mx-auto px-4 py-8">
         {/* Header with Enhanced Design */}
         <div className="text-center mb-12">
           <div className="inline-block p-2 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full mb-6 shadow-lg">
@@ -74,7 +60,7 @@ function App() {
             </div>
             <div className="flex items-center space-x-2">
               <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
-              <span className="text-sm text-gray-600">{availableRooms.length} Rooms Available</span>
+              <span className="text-sm text-gray-600">{availableRooms?.length || 0} Rooms Available</span>
             </div>
             <div className="flex items-center space-x-2">
               <div className="w-3 h-3 bg-purple-500 rounded-full"></div>
@@ -94,6 +80,9 @@ function App() {
                 occupiedRooms={occupiedRooms}
                 bookedRooms={bookedRooms}
                 totalRooms={totalRooms}
+                isLoading={isLoading}
+                error={error}
+                onClearError={clearError}
               />
             </div>
             
@@ -128,39 +117,9 @@ function App() {
             />
           </div>
         </div>
-        
-        {/* Enhanced Footer */}
-        <div className="text-center py-8 border-t border-gray-200 bg-white/50 backdrop-blur-sm rounded-2xl">
-          <div className="flex justify-center items-center space-x-6 mb-4">
-            <div className="flex items-center space-x-2 text-gray-500">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-              </svg>
-              <span className="text-sm">Fast & Responsive</span>
-            </div>
-            <div className="flex items-center space-x-2 text-gray-500">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-              <span className="text-sm">AI-Optimized</span>
-            </div>
-            <div className="flex items-center space-x-2 text-gray-500">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-              </svg>
-              <span className="text-sm">Secure & Reliable</span>
-            </div>
-          </div>
-          
-          <p className="text-gray-600 text-sm mb-2">
-            Hotel Room Reservation System - Optimized for minimal travel time between rooms
-          </p>
-          <p className="text-gray-500 text-xs">
-            97 rooms across 10 floors with intelligent booking algorithms • Built with React & Tailwind CSS
-          </p>
         </div>
       </div>
-    </div>
+    </ErrorBoundary>
   );
 }
 
